@@ -5,7 +5,8 @@ import { getPlatformDate } from '../../utils/getPlatformDate';
 import theme from '../../styles/theme';
 
 export function generateInterval(start: DayProps, end: DayProps) {
-  let interval: MarkedDateProps = {}
+  let interval: MarkedDateProps = {};
+  
   eachDayOfInterval({start: new Date(start.timestamp),end: new Date(end.timestamp)})
   .forEach((item)=> {
     const date = format(getPlatformDate(item), 'yyyy-MM-dd');

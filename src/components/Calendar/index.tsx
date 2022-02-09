@@ -10,6 +10,9 @@ import {
   DateCallbackHandler
 } from 'react-native-calendars';
 
+
+
+
 LocaleConfig.locales['pt-br'] = ptBR;
 LocaleConfig.defaultLocale = 'pt-br';
 
@@ -68,7 +71,7 @@ function Calendar({ markedDates, onDayPress }: CalendarProps) {
       }}
 
       firstDay={1}
-      minDate={String(new Date())}
+      minDate={new Date()}
       markingType="period"
       markedDates={markedDates}
       onDayPress={onDayPress}

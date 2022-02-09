@@ -19,6 +19,7 @@ import { Car } from '../../components/Car';
 import { Load } from '../../components/Load';
 
 
+
 export function Home() {
   const [loading, setLoading] = useState(true);
   const [cars, setCars] = useState<CarDTO[]>([]);

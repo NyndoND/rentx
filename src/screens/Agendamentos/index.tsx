@@ -9,9 +9,9 @@ import { getPlatformDate } from "../../utils/getPlatformDate";
 import { BackButton } from "../../components/BackButton";
 import { Button } from "../../components/Button";
 
-import { 
-  Calendar, 
-  DayProps, 
+import {
+  Calendar,
+  DayProps,
   generateInterval,
   MarkedDateProps
 } from "../../components/Calendar";
@@ -52,15 +52,12 @@ export function Agendamentos() {
   const { car } = route.params as Params;
 
   function handleConfirmRental() {
-    if(!rentalPeriod.startFormatted || !rentalPeriod.endFormatted){
-      Alert.alert("Selecione o intervalo para alugar.");
-    } else {
-      navigation.navigate('AgendamentoDetails', {
-        car,
-        dates: Object.keys(markedDates)
-      });
-    }
-  }
+
+    navigation.navigate('AgendamentoDetails', {
+      car,
+      dates: Object.keys(markedDates)
+    });
+  };
 
   function handleGoback() {
     navigation.goBack();
@@ -70,7 +67,7 @@ export function Agendamentos() {
     let start = !lastSelectedDate.timestamp ? date : lastSelectedDate;
     let end = date;
 
-    if(start.timestamp > end.timestamp){
+    if (start.timestamp > end.timestamp) {
       start = end;
       end = start;
     }
@@ -83,8 +80,8 @@ export function Agendamentos() {
     const endDate = Object.keys(interval)[Object.keys(interval).length - 1];
 
     setRentalPeriod({
-      startFormatted: format(getPlatformDate(new Date (firstDate)), 'dd/MM/yyyy'),
-      endFormatted: format(getPlatformDate(new Date (endDate)), 'dd/MM/yyyy'),
+      startFormatted: format(getPlatformDate(new Date(firstDate)), 'dd/MM/yyyy'),
+      endFormatted: format(getPlatformDate(new Date(endDate)), 'dd/MM/yyyy'),
     })
   }
 
@@ -133,6 +130,7 @@ export function Agendamentos() {
       </Content>
       <Footer>
         <Button
+          enabled={!!rentalPeriod.startFormatted}
           title="Confirmar"
           onPress={handleConfirmRental}
         />

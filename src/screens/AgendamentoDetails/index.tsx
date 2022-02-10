@@ -60,6 +60,7 @@ interface RentalPeriod {
 
 export function AgendamentoDetails() {
 
+  const [loading, setLoading]= useState(false);
   const [rentalPeriod, setRentalPeriod] = useState<RentalPeriod>({} as RentalPeriod);
   const theme = useTheme();
   const navigation = useNavigation();
@@ -69,6 +70,7 @@ export function AgendamentoDetails() {
   const renTotal = Number(dates.length * car.rent.price);
 
   async function handleConfirm() {
+    setLoading(true);
 
     const schedulesByCar = await api.get(`/schedules_bycars/${car.id}`);
 
@@ -77,13 +79,22 @@ export function AgendamentoDetails() {
       ...dates,
     ];
 
-    api.put(`/schedules_bycars/${car.id}`,{
+    await api.post('schedules_byuser', {
+      user_id: 1,
+      car,
+      startDate: format(getPlatformDate(new Date(dates[0])), 'dd/MM/yyyyy'),
+      endDate: format(getPlatformDate(new Date(dates[dates.length - 1])), 'dd/MM/yyyyy')
+    });
+
+    api.put(`/schedules_bycars/${car.id}`, {
       id: car.id,
       unavailable_dates,
     })
-    .then(() => navigation.navigate('AgendamentoConcluido'))
-    .catch(() => Alert.alert("Não foi possível confirmar o agendamento"))
-
+      .then(() => navigation.navigate('AgendamentoConcluido'))
+      .catch(() => {
+        Alert.alert("Não foi possível confirmar o agendamento");
+        setLoading(false);
+      })
   }
 
   function handleGoback() {
@@ -93,7 +104,7 @@ export function AgendamentoDetails() {
   useEffect(() => {
     setRentalPeriod({
       start: format(getPlatformDate(new Date(dates[0])), 'dd/MM/yyyyy'),
-      end: format(getPlatformDate(new Date(dates[dates.length -1])), 'dd/MM/yyyyy')
+      end: format(getPlatformDate(new Date(dates[dates.length - 1])), 'dd/MM/yyyyy')
     })
   }, [])
   return (
@@ -172,7 +183,13 @@ export function AgendamentoDetails() {
       </Content>
 
       <Footer>
-        <Button title="Alugar Agora" color={theme.colors.sucess} onPress={handleConfirm} />
+        <Button
+          title="Alugar Agora"
+          color={theme.colors.sucess}
+          onPress={handleConfirm}
+          enabled={!loading}
+          loading={loading}
+        />
       </Footer>
     </Container>
   );

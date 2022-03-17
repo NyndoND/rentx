@@ -60,7 +60,7 @@ interface RentalPeriod {
 
 export function AgendamentoDetails() {
 
-  const [loading, setLoading]= useState(false);
+  const [loading, setLoading] = useState(false);
   const [rentalPeriod, setRentalPeriod] = useState<RentalPeriod>({} as RentalPeriod);
   const theme = useTheme();
   const navigation = useNavigation();
@@ -90,7 +90,13 @@ export function AgendamentoDetails() {
       id: car.id,
       unavailable_dates,
     })
-      .then(() => navigation.navigate('AgendamentoConcluido'))
+      .then(() => {
+        navigation.navigate('Confirmation', {
+          title: 'Carro Alugado',
+          message: `Agora você só precisa ir \naté a concessionária da RENTX \npegar o seu automóvel`,
+          nextScreenRoute: 'Home',
+        })
+      })
       .catch(() => {
         Alert.alert("Não foi possível confirmar o agendamento");
         setLoading(false);

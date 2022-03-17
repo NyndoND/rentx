@@ -4,7 +4,7 @@ import { Home } from './src/screens/Home';
 import { CarDetails } from './src/screens/CarDetails';
 import { Agendamentos } from './src/screens/Agendamentos';
 import { AgendamentoDetails } from './src/screens/AgendamentoDetails';
-import { AgendamentoConcluido } from './src/screens/AgendamentoConcluido';
+import { Confirmation } from './src/screens/Confirmation';
 
 import { Routes } from './src/routes';
 

@@ -22,6 +22,9 @@ import { ThemeProvider } from 'styled-components';
 import AppLoading from 'expo-app-loading';
 import theme from './src/styles/theme';
 
+import { AppProvider } from './src/hooks';
+
+
 export default function App() {
 
   const [fontsLoaded] = useFonts({
@@ -36,8 +39,10 @@ export default function App() {
     return <AppLoading />
   }
   return (
-    <ThemeProvider theme= {theme}>
-      <Routes />
+    <ThemeProvider theme={theme}>
+      <AppProvider>
+        <Routes />
+      </AppProvider>
     </ThemeProvider>
   );
 }

@@ -23,6 +23,7 @@ import {
   FormTitle
 } from './styles';
 
+
 export function FirstStep() {
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
@@ -45,12 +46,12 @@ export function FirstStep() {
           .required('CNH é obrigatória')
       });
 
-      const data = { name, email, driverLicense};
+      const data = { name, email, driverLicense };
       await schema.validate(data);
 
-      navigation.navigate('SecondStep', { user: data});
+      navigation.navigate('SecondStep', { user: data });
     } catch (error) {
-      if(error instanceof Yup.ValidationError){
+      if (error instanceof Yup.ValidationError) {
         return Alert.alert('Opa', error.message);
       }
     }

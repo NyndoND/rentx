@@ -6,8 +6,8 @@ import HomeSvg from '../assets/home.svg';
 import CarSvg from '../assets/car.svg';
 import PeopleSvg from '../assets/people.svg';
 
-import { Home } from '../screens/Home';
 import { MyCars } from '../screens/MyCars';
+import { Profile } from '../screens/Profile';
 import { AppStackRoutes } from './app.stack.routes'
 import { useTheme } from "styled-components";
 import { Platform } from "react-native";
@@ -53,7 +53,7 @@ export function AppTabRoutes() {
       />
       <Screen
         name="Profile"
-        component={Home}
+        component={Profile}
         options={{
           tabBarIcon: ({ color }) => (
             <PeopleSvg width={24} height={24} fill={color} />

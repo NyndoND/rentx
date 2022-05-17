@@ -13,12 +13,12 @@ import {
   CarImage,
 } from './styles';
 
-import { CarDTO } from '../../dtos/CarDTO';
+import { Car as ModelCar } from '../../database/model/Car';
 import { getAccessoryIcon } from "../../utils/getAccessoryIcon";
 
 
 interface Props extends RectButtonProps{
-  data: CarDTO;
+  data: ModelCar;
 }
 
 
